@@ -24,10 +24,9 @@
         <button id="login-btn" class="active">Log-In</button>
         <button id="register-btn">Sign-Up</button>
       </div>
-      
       <div id="login-form" class="form-container">
         <h3>Log-In</h3>
-        <form action="login.php" method="post" id="actual-login-form">
+        <form action="login.php" method="post">
           <fieldset>
             <legend>Login Type</legend>
             <label>
@@ -45,43 +44,39 @@
         </form>
         <p><strong>Demo Credentials:</strong></p>
         <ul>
-          <li><strong>Member:</strong> Username: user1, Password: pass1</li>
+          <li><strong>Member:</strong> Username: user1 or user2, Password: pass1 or pass2</li>
           <li><strong>Admin:</strong> Username: admin, Password: admin123</li>
         </ul>
       </div>
-
-      <div id="register-form" class="form-container" style="display:none;">
-        <h3>Sign-Up</h3>
-        <form action="login.php" method="post">
-          <input type="hidden" name="action" value="register">
-          <label for="reg_username">Username:</label>
-          <input type="text" id="reg_username" name="username" required>
-          <label for="reg_password">Password:</label>
-          <input type="password" id="reg_password" name="password" required>
-          <label for="confirm_password">Confirm Password:</label>
-          <input type="password" id="confirm_password" name="confirm_password" required>
-          <fieldset>
-            <legend>Role</legend>
-            <label>
-              <input type="radio" name="role" value="member" required> Member
-            </label>
-            <label>
-              <input type="radio" name="role" value="admin" required> Admin
-            </label>
-          </fieldset>
-          <button type="submit">Sign-Up</button>
-        </form>
-        <p><strong>Demo Sign-Up:</strong> Create a new account with any unique username, password, and select your role (Member or Admin).</p>
-      </div>
+    <div id="register-form" class="form-container" style="display:none;">
+      <h3>Sign-Up</h3>
+      <form action="login.php" method="post">
+        <input type="hidden" name="action" value="register">
+        <label for="reg_username">Username:</label>
+        <input type="text" id="reg_username" name="username" required>
+        <label for="reg_password">Password:</label>
+        <input type="password" id="reg_password" name="password" required>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <fieldset>
+          <legend>Role</legend>
+          <label>
+            <input type="radio" name="role" value="member" required> Member
+          </label>
+          <label>
+            <input type="radio" name="role" value="admin" required> Admin
+          </label>
+        </fieldset>
+        <button type="submit">Sign-Up</button>
+      </form>
+      <p><strong>Demo Sign-Up:</strong> Create a new account with any unique username, password, and select your role (Member or Admin).</p>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2025 FitFlow</p>
   </footer>
-
   <script>
-    // 1. Handling URL parameters for errors (optional legacy support)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('error')) {
       const error = urlParams.get('error');
@@ -92,7 +87,7 @@
       if (message) alert(message);
     }
 
-    // 2. Tab Toggle Logic
+    // Toggle functionality
     document.getElementById('login-btn').addEventListener('click', function() {
       document.getElementById('login-form').style.display = 'block';
       document.getElementById('register-form').style.display = 'none';
@@ -107,36 +102,10 @@
       document.getElementById('login-btn').classList.remove('active');
     });
 
+    // Check hash on load
     if (window.location.hash === '#register') {
       document.getElementById('register-btn').click();
     }
-
-    // 3. THE FIX: Intercept Login Form Submission
-    const loginForm = document.getElementById('actual-login-form');
-    
-    loginForm.addEventListener('submit', function(event) {
-      // PREVENT the browser from going to login.php
-      event.preventDefault(); 
-
-      // Get values
-      const role = document.querySelector('input[name="role"]:checked').value;
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      // Check Credentials (Demo Logic)
-      if (role === 'admin' && username === 'admin' && password === 'admin123') {
-        // Redirect to Admin Dashboard
-        window.location.href = 'admin.html';
-      } 
-      else if (role === 'member' && (username === 'user1' || username === 'user2')) {
-        // Redirect to Member Dashboard
-        window.location.href = 'dashboard.html';
-      } 
-      else {
-        // Error handling
-        alert('Invalid credentials! Please try: \nAdmin: admin/admin123 \nMember: user1/pass1');
-      }
-    });
   </script>
 </body>
 </html>
