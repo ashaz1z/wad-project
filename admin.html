@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | FitFlow</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="assets/img/FitFlowLogo.jpeg" alt="Logo" class="logo"></a>
+    <h1>FitFlow</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="logout.php">Logout</a>
+    </nav>
+  </header>
 
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3>Admin Panel</h3>
+      <ul>
+        <li><a href="#manage-users">Manage Users</a></li>
+        <li><a href="#analytics">Analytics</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#support">Support</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-main">
+      <h2>Admin Dashboard</h2>
+      <p>Welcome, Admin! Manage the FitFlow platform from here.</p>
+
+      <section id="manage-users" class="dashboard-section">
+        <h3>Manage Users</h3>
+        <p>View and manage registered users.</p>
+        <button>View Users</button>
+      </section>
+
+      <section id="analytics" class="dashboard-section">
+        <h3>Analytics</h3>
+        <p>Check platform usage statistics.</p>
+        <button>View Reports</button>
+      </section>
+
+      <section id="settings" class="dashboard-section">
+        <h3>Settings</h3>
+        <p>Configure system settings.</p>
+        <button>Configure</button>
+      </section>
+
+      <section id="support" class="dashboard-section">
+        <h3>Support</h3>
+        <p>Handle user inquiries.</p>
+        <button>View Tickets</button>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 FitFlow</p>
+  </footer>
+</body>
+</html>
