@@ -46,6 +46,11 @@ function updateUser($id, $username, $email) {
 // Delete User
 function deleteUser($id) {
     global $conn;
+    // First, delete all transactions associated with the user
+    $stmt = $conn->prepare("DELETE FROM transactions WHERE user_id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    // Then delete the user
     $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
     $stmt->bind_param("i", $id);
     return $stmt->execute();

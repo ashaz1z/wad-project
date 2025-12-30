@@ -26,6 +26,7 @@ $allWellnessItems = getAllWellnessItems();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | FitFlow</title>
   <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
@@ -60,6 +61,19 @@ $allWellnessItems = getAllWellnessItems();
             <div class="card">Total Wellness Items: <?php echo $totalWellnessItems; ?></div>
             <div class="card">Total Transactions: <?php echo $totalTransactions; ?></div>
             <div class="card">Total Revenue: $<?php echo number_format($totalRevenue, 2); ?></div>
+        </div>
+
+        <h4>Charts</h4>
+        <div class="charts-grid">
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="userGrowthChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="transactionVolumeChart"></canvas>
+            </div>
         </div>
       </section>
 
@@ -113,6 +127,12 @@ $allWellnessItems = getAllWellnessItems();
 
       <section id="manage-transactions" class="dashboard-section">
         <h3>Recent Transactions</h3>
+        <div class="filter-buttons">
+            <button class="filter-btn" data-period="daily">Daily</button>
+            <button class="filter-btn" data-period="weekly">Weekly</button>
+            <button class="filter-btn" data-period="monthly">Monthly</button>
+            <button class="export-btn" onclick="exportTransactions('all')">Export All</button>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -138,11 +158,19 @@ $allWellnessItems = getAllWellnessItems();
             </tbody>
         </table>
       </section>
+
+      <section id="transaction-reports" class="dashboard-section">
+        <h3>Transaction Reports</h3>
+        <div id="transaction-summary" class="summary-grid">
+            <!-- Summary statistics will be loaded here -->
+        </div>
+      </section>
     </main>
   </div>
 
   <footer>
     <p>&copy; 2025 FitFlow</p>
   </footer>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
