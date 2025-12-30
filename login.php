@@ -1,84 +1,53 @@
 <?php
 session_start();
+include 'user_actions.php';
 
-// Include database connection
-require_once 'config/db_connect.php';
+// Registration
+if (isset($_POST['action']) && $_POST['action'] == 'register') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $email = $_POST['username'] . '@example.com'; // Using username as a dummy email
 
-// Initialize variables
-$error = '';
+    if ($password !== $confirm_password) {
+        header('Location: login.html?error=password_mismatch#register');
+        exit();
+    }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] === 'register') {
-        // Registration logic
-        $username = trim($_POST['username']);
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-        $role = $_POST['role'];
+    if (getUserByUsername($username)) {
+        header('Location: login.html?error=username_exists#register');
+        exit();
+    }
 
-        // Validation
-        if ($password !== $confirm_password) {
-            $error = 'password_mismatch';
-        } else {
-            // Check if username exists
-            $users_file = 'users.json';
-            $users = file_exists($users_file) ? json_decode(file_get_contents($users_file), true) : [];
-
-            if (isset($users[$username])) {
-                $error = 'username_exists';
-            } else {
-                // Save user (plain text for demo)
-                $users[$username] = [
-                    'password' => $password,
-                    'role' => $role,
-                    'created_at' => date('Y-m-d H:i:s')
-                ];
-
-                file_put_contents($users_file, json_encode($users, JSON_PRETTY_PRINT));
-
-                // Auto-login after registration
-                $_SESSION['username'] = $username;
-                $_SESSION['role'] = $role;
-
-                // Redirect to appropriate dashboard
-                if ($role === 'admin') {
-                    header('Location: admin.html');
-                } else {
-                    header('Location: dashboard.html');
-                }
-                exit;
-            }
-        }
+    if (createUser($username, $password, $email)) {
+        header('Location: login.html');
+        exit();
     } else {
-        // Login logic
-        $username = trim($_POST['username']);
-        $password = $_POST['password'];
-        $role = $_POST['role'];
-
-        // Load users
-        $users_file = 'users.json';
-        $users = file_exists($users_file) ? json_decode(file_get_contents($users_file), true) : [];
-
-        // Check credentials
-        if (isset($users[$username]) && $users[$username]['password'] === $password && $users[$username]['role'] === $role) {
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-
-            // Redirect to appropriate dashboard
-            if ($role === 'admin') {
-                header('Location: admin.html');
-            } else {
-                header('Location: dashboard.html');
-            }
-            exit;
-        } else {
-            $error = 'invalid_credentials';
-        }
+        header('Location: login.html?error=registration_failed#register');
+        exit();
     }
 }
 
-// Redirect back to login with error
-if ($error) {
-    header('Location: login.html?error=' . $error);
-    exit;
+// Login
+$username = $_POST['username'];
+$password = $_POST['password'];
+$role = $_POST['role'];
+
+$user = getUserByUsername($username);
+
+if ($user && password_verify($password, $user['password'])) {
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['role'] = $role;
+
+    if ($role === 'admin') {
+        header('Location: admin.html');
+    } else {
+        header('Location: dashboard.html');
+    }
+    exit();
+} else {
+    header('Location: login.html?error=invalid_credentials');
+    exit();
 }
 ?>
