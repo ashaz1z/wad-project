@@ -1,5 +1,3 @@
-include 'config/db_connect.php';
-=======
 <?php
 include 'config/db_connect.php';
 
@@ -167,5 +165,3 @@ function exportTransactions($period) {
     fclose($output);
     exit;
 }
-
-

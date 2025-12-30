@@ -39,17 +39,6 @@ $user_ids = $conn->query("SELECT id FROM users")->fetch_all(MYSQLI_ASSOC);
 $item_ids = $conn->query("SELECT id FROM wellness_items")->fetch_all(MYSQLI_ASSOC);
 
 // Insert sample transactions
-for ($i = 0; $i < 50; $i++) {
-    $user_id = $user_ids[array_rand($user_ids)]['id'];
-    $item_id = $item_ids[array_rand($item_ids)]['id'];
-    $quantity = rand(1, 5);
-    $total_price = rand(10, 100) + rand(0, 99) / 100; // Random price between 10.00 and 100.99
-
-    $stmt = $conn->prepare("INSERT INTO transactions (user_id, item_id, quantity, total_price) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("iiid", $user_id, $item_id, $quantity, $total_price);
-    $stmt->execute();
-    echo "Inserted transaction $i\n";
-}
 
 echo "Sample data inserted successfully!\n";
 ?>

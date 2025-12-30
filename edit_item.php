@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    updateWellnessItem($item_id, $name, $description, $price);
+    $stock = $_POST['stock'];
+    updateWellnessItem($item_id, $name, $description, $price, $stock);
     header('Location: admin.php#manage-wellness-items');
     exit();
 }
@@ -29,8 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <header>
-    <a href="index.html"><img src="assets/img/FitFlowLogo.jpeg" alt="Logo" class="logo"></a>
-    <h1>FitFlow</h1>
+    <div class="header-brand">
+      <a href="index.html"><img src="assets/img/FitFlowLogo.jpeg" alt="Logo" class="logo"></a>
+      <h1>FitFlow</h1>
+    </div>
     <nav>
       <a href="admin.php">Admin Dashboard</a>
       <a href="logout.php">Logout</a>
@@ -44,9 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $item['name']; ?>" required>
         <label for="description">Description:</label>
-        <textarea id="description" name="description" required><?php echo $item['description']; ?></textarea>
+        <input type="text" id="description" name="description" value="<?php echo $item['description']; ?>" required>
         <label for="price">Price:</label>
         <input type="number" step="0.01" id="price" name="price" value="<?php echo $item['price']; ?>" required>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" value="<?php echo $item['stock']; ?>" required>
         <button type="submit">Update Item</button>
       </form>
     </div>

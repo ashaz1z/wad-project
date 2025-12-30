@@ -42,4 +42,13 @@ function deleteTransaction($id) {
     $stmt->bind_param("i", $id);
     return $stmt->execute();
 }
+
+// Get spending data for a specific user (last 30 days) for charts
+function getUserSpendingData($user_id, $days = 30) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT DATE(transaction_date) as date, SUM(total_price) as daily_total FROM transactions WHERE user_id = ? AND transaction_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY) GROUP BY DATE(transaction_date) ORDER BY date");
+    $stmt->bind_param("ii", $user_id, $days);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
 ?>

@@ -8,43 +8,59 @@
 </head>
 <body>
   <header>
-    <a href="index.html"><img src="assets/img/FitFlowLogo.jpeg" alt="Logo" class="logo"></a>
-    <h1>FitFlow</h1>
+    <div class="header-brand">
+      <a href="index.html"><img src="assets/img/FitFlowLogo.jpeg" alt="Logo" class="logo"></a>
+      <h1>FitFlow</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="login.html">Log-In</a>
+    </nav>
   </header>
 
-  <div class="main-layout">
-    <aside class="sidebar">
-      <h3>Navigation</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="login.html">Log-In</a></li>
-      </ul>
-    </aside>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Fitness starts with what you eat.</h2>
+        <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem;">Take control of your goals. Track calories, break down ingredients, and log your activities with FitFlow.</p>
+        <a href="login.html"><button style="font-size: 1.1rem; padding: 15px 40px;">Start for Free</button></a>
+      </div>
+    </section>
 
-    <main class="main-content">
-      <section class="hero">
-        <h2>Welcome to FitFlow!</h2>
-        <p>Discover tools, resources, and dashboards designed to support your wellness journeys.</p>
-        <a href="login.html"><button>Get Started</button></a>
-      </section>
-    </main>
-  </div>
+    <section class="content" style="background: white; margin-top: 0; max-width: 100%; padding: 4rem 2rem;">
+      <div class="container" style="text-align: center;">
+        <h3 style="font-size: 2rem; margin-bottom: 3rem;">The Tools for Your Goals</h3>
+        <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div class="card" style="text-align: center; border: none; box-shadow: none;">
+            <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">📝</div>
+            <h4>Learn. Track. Improve.</h4>
+            <p>Keeping a food diary helps you understand your habits and increases your likelihood of hitting your goals.</p>
+          </div>
+          <div class="card" style="text-align: center; border: none; box-shadow: none;">
+            <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">🔥</div>
+            <h4>Logging Simplified</h4>
+            <p>Scan barcodes, save meals and recipes, and use Quick Tools for fast and easy food tracking.</p>
+          </div>
+          <div class="card" style="text-align: center; border: none; box-shadow: none;">
+            <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">🥗</div>
+            <h4>Stay Motivated</h4>
+            <p>Join the World’s Largest Fitness Community for advice, tips, and support 24/7.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: var(--primary-color); color: white; padding: 4rem 2rem; text-align: center;">
+      <h3 style="color: white; font-size: 2rem;">Start your journey today</h3>
+      <p style="color: rgba(255,255,255,0.9);">Join millions of users who are reaching their goals with FitFlow.</p>
+      <a href="login.html#register"><button style="background: white; color: var(--primary-color); margin-top: 1rem;">Sign Up Now</button></a>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; 2025 FitFlow</p>
   </footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
