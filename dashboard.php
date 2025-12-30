@@ -33,5 +33,14 @@ foreach ($spendingData as $day) {
 $progressLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'];
 $progressValues = [85, 84.2, 83.5, 82.8, 82.1, 81.5];
 
-include 'dashboard_view.php';
+$template = file_get_contents('dashboard.html');
+$template = str_replace('{{username}}', htmlspecialchars($username), $template);
+$template = str_replace('{{transactionCount}}', $transactionCount, $template);
+$template = str_replace('{{totalSpent}}', number_format($totalSpent, 2), $template);
+$template = str_replace('{{chartLabels}}', json_encode($chartLabels, JSON_HEX_APOS), $template);
+$template = str_replace('{{chartValues}}', json_encode($chartValues, JSON_HEX_APOS), $template);
+$template = str_replace('{{progressLabels}}', json_encode($progressLabels, JSON_HEX_APOS), $template);
+$template = str_replace('{{progressValues}}', json_encode($progressValues, JSON_HEX_APOS), $template);
+
+echo $template;
 ?>
